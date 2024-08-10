@@ -3,35 +3,37 @@ import styles from "./Form.module.css";
 import InputPhoneNumber from "../InputPhoneNumber/InputPhoneNumber";
 
 const Form = () => {
-  const [value, setValue] = useState("");
-  const onChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    let currentValue = event.target.value;
-    const number = currentValue.replace(/\D+/g, "");
-
-    if (number.length === 0) {
-      currentValue = "";
-    } else if (number.length > 0 && number.length <= 3) {
-      currentValue = `(${number}`;
-    } else if (number.length >= 4 && number.length <= 6) {
-      currentValue = `(${number.substring(0, 3)}) ${number.substring(3, 6)}`;
-    } else {
-      currentValue = `(${number.substring(0, 3)}) ${number.substring(
-        3,
-        6
-      )}-${number.substring(6, 10)}`;
-    }
-
-    setValue(currentValue);
-  }, []);
+  const [homeNumber, setHomeNumber] = useState("");
+  const [workNumber, setWorkNumber] = useState("");
 
   const onReset = useCallback(() => {
-    setValue("");
+    setHomeNumber("");
+    setWorkNumber("");
   }, []);
 
+  const isDisabledButton =
+    homeNumber.replace(/\D+/g, "").length < 10 ||
+    workNumber.replace(/\D+/g, "").length < 10;
+
   return (
-    <form className={styles.formWrapper}>
-      <InputPhoneNumber maxLength={14} onChange={onChange} value={value} />
-      <button onClick={onReset}>Reset form</button>
+    <form className={styles["form-wrapper"]}>
+      <InputPhoneNumber
+        maxLength={14}
+        setValue={setHomeNumber}
+        value={homeNumber}
+        name={"Home number"}
+        id={"Home number"}
+      />
+      <InputPhoneNumber
+        maxLength={14}
+        setValue={setWorkNumber}
+        value={workNumber}
+        name={"Work number"}
+        id={"Work number"}
+      />
+      <button disabled={isDisabledButton} onClick={onReset}>
+        Reset form
+      </button>
     </form>
   );
 };
