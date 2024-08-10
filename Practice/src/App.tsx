@@ -1,10 +1,10 @@
 import "./App.css";
-import Form from "./components/Form/Form";
+import TipCalculatorForm from "./components/TipCalculatorForm/TipCalculatorForm";
 
 function App() {
   return (
     <main>
-      <Form />
+      <TipCalculatorForm />
     </main>
   );
 }

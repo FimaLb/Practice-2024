@@ -1,0 +1,16 @@
+.custom-input-lable-wrapper {
+  display: flex;
+}
+
+.position-top {
+  flex-direction: column;
+  padding: 0 0 15px;
+}
+
+.position-left {
+  flex-direction: row;
+}
+
+.position-left .custom-input-lable {
+  padding-right: 20px;
+}
